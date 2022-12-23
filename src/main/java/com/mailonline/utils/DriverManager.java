@@ -17,8 +17,7 @@ public class DriverManager {
 		{
 			e.printStackTrace();
 		}
-		return driver;
-		
+		return driver;		
 	}
 	
 	public void closeDriver(WebDriver driver)
