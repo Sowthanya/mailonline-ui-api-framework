@@ -1,28 +1,21 @@
 package com.mailonline.ui.steps;
 
-
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
+import com.mailonline.pages.HomePage;
+import com.mailonline.utils.DriverManager;
 import io.cucumber.java.en.Given;
 
 public class HomePageStepdef{
 	
-	@Given("I launch the application")
-	public void launchApplication()
+	WebDriver driver;
+	public HomePageStepdef(DriverManager driverManager)
 	{
-		WebDriver driver =  new ChromeDriver();
-		try
-		{
-		driver.get("https://www.bigbasket.com/");
-		driver.manage().window().maximize();		
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));		
-		}catch(Exception e)
-		{
-			e.printStackTrace();		
-		}		
+		this.driver = driverManager.getDriver();
 	}
 	
+	@Given("I launch the application")
+	public void launchApplication()	{
+		    HomePage homePage = new HomePage(driver);			
+		    homePage.launchAppURL("https://www.bigbasket.com/");
+	}	
 }
