@@ -26,10 +26,11 @@ public class HomePage
 		}
 	}
 	
-	public String getDateFromHomePage()
+	public String getDateTimeFromHomePage()
 	{
-	   String dateToday = driver.findElement(By.xpath("//div[@class='weather']/strong")).getText();	 
-	   return dateToday;
+	   String dateToday = driver.findElement(By.xpath("//div[@class='weather']/strong")).getText();
+	   String timeNow = driver.findElement(By.xpath("//div[@class='weather']/a/span[1]")).getText();
+	   return dateToday + " " + timeNow;
 	}
 	
 	public String getHomePageName()

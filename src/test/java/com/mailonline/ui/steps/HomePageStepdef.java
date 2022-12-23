@@ -41,7 +41,7 @@ public class HomePageStepdef{
 	public void dateVerification()
 	{
 		Calendar cal = Calendar.getInstance();
-		String dateInHomePage = homePage.getDateFromHomePage();
+		String dateInHomePage = homePage.getDateTimeFromHomePage();
 		String currentDate = GenericUtils.getDateInRequiredFormat(cal);
 		Assert.assertEquals(dateInHomePage,currentDate);
 		
