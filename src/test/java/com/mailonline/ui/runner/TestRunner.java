@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-		features = "src/test/java/com/mailonline/ui/features",
+		features = "src/test/java/com/mailonline/ui/features/HomePage.feature",
 		glue = "com.mailonline.ui.steps"
 		)
 
