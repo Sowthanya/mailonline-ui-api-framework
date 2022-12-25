@@ -10,7 +10,5 @@ Feature: HomePage Validation
   @MenuColourValidation  
   Scenario: Verify Primary and Secondary navigation colours are same
   Given I launch the application
-  When I click on the "Sport" navigation
+  When I click on the "sport" primary navigation
   Then I should see both primary and secondary navigations are same in colour
-  
-  

@@ -4,8 +4,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 
 public class GenericUtils {
+	
+	public static String getBackgroundColor(WebElement element)
+	{
+		return Color.fromString(element.getCssValue("background-color")).asHex();
+		
+	}
 
 	public static String getDateInRequiredFormat(Calendar currentCalDate) {
 		String dayNumberSuffix = getDayNumberSuffix(currentCalDate.get(Calendar.DAY_OF_MONTH));
