@@ -1,6 +1,10 @@
 package com.mailonline.pages;
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,6 +35,24 @@ public class SportPage {
 	
 	@FindBy(xpath="//div[contains(@class,'counter')]")
 	WebElement counterLabel;
+	
+	@FindBy(xpath="//div[@id='header_container']//h2")
+	WebElement facebookHeader;
+	
+	@FindBy(xpath="//form[@id='login_form']//a[@aria-label='Log in']")
+	WebElement facebookLoginButton;
+	
+	@FindBy(xpath="//div[@id='email_container']")
+	WebElement facebookUserNameInput;
+	
+	public WebElement getFacebookUserNameInput() {
+		return facebookUserNameInput;
+	}
+	
+	//dynamic xpath
+	public WebElement getSocialMediaLink(String handleName) {
+		return driver.findElement(By.xpath("(//ul[contains(@class,'linksHolder')])[1]/li[@data-social-scope='" + handleName + "']"));
+	}
 	
 	public WebElement getGalleryPrevButton() {
 		return galleryPrevButton;
@@ -64,5 +86,43 @@ public class SportPage {
 		int imageNumber = Integer.parseInt(counterLabel.getText().split(" ")[0]);
 		return imageNumber;
 	}
-
+	
+	public void openSocialMedia()
+	{
+		Action.scrollInToView(driver, mediaLinksHolder);		
+		new Actions(driver)
+		.moveToElement(FirstGalleryButton)
+		.build()
+		.perform();			
+		
+	}	
+	
+	public String verifyFacebookDialog(String handleName)
+	{		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		
+		String mainWindow = driver.getWindowHandle();		
+		
+		getSocialMediaLink(handleName).click();		
+		
+		Set<String> windows = driver.getWindowHandles();
+	    Iterator<String> iterator = windows.iterator();	
+	    String windowTitle=null;
+	    
+	    while (iterator.hasNext()) {
+	    	
+	          String childWindow = iterator.next();
+	          
+	          if (!mainWindow.equalsIgnoreCase(childWindow)) {
+	              driver.switchTo().window(childWindow);   
+	              wait.until(ExpectedConditions.elementToBeClickable(facebookLoginButton));
+	              windowTitle = driver.getTitle();
+//	              facebookLoginButton.click();	    
+//	              wait.until(ExpectedConditions.visibilityOf(facebookUserNameInput));
+	              System.out.println(windowTitle);
+	           }
+	       }
+	    return windowTitle;
+	}
+	
 }

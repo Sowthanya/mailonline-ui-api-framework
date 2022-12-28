@@ -84,5 +84,4 @@ public class HomePage
 		return bckgclr;
 	}
 	
-		
 }

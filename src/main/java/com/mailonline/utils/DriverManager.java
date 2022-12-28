@@ -3,6 +3,7 @@ package com.mailonline.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -14,11 +15,11 @@ public class DriverManager {
 	public WebDriver getDriver()
 	{
 		try
-		{		
+		{	
 	    driver = new ChromeDriver();
 		}catch(Exception e)
 		{
-			e.printStackTrace();
+		 e.printStackTrace();
 		}
 		return driver;		
 	}
@@ -27,5 +28,5 @@ public class DriverManager {
 	public void closeDriver() {
 		driver.quit();
 	}
-
+	
 }

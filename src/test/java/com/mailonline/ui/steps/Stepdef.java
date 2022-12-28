@@ -67,6 +67,7 @@ public class Stepdef{
 		String secondaryNavColour = homePage.getSecondaryNavBackgroundColour();
 		Assert.assertEquals(primaryNavColour, secondaryNavColour);
 	}
+	
 	@When("I open the first article")
 	public void openArticle()
 	{
@@ -95,5 +96,20 @@ public class Stepdef{
     	Assert.assertEquals(sportPage.getImageNumber(), 2);
     	sportPage.getGalleryPrevButton().click();
     	Assert.assertEquals(sportPage.getImageNumber(), 1);
-    }	 
+    }
+    
+    @When("^I click on the facebook icon in the image gallery$")
+    public void openGalleryNavigation()
+    {	
+        sportPage.openSocialMedia();
+    }
+    
+    @Then("I verify the \"(.*)\" modal dialog is opened$")
+    public void verifyFacebookModal(String handleName)
+    {
+    	String windowTitle = sportPage.verifyFacebookDialog(handleName);
+    	Assert.assertEquals(sportPage.getFacebookUserNameInput().isDisplayed(),true);
+    	System.out.println(windowTitle);
+    }
+    
 }
