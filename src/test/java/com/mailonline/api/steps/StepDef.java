@@ -2,6 +2,8 @@ package com.mailonline.api.steps;
 
 import org.testng.Assert;
 import org.testng.Reporter;
+
+import com.mailonline.utils.Constants;
 import com.mailonline.utils.PayLoadBuilder;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,7 +19,7 @@ public class StepDef {
 
 	@When("^I add a new pet to the store with the \"(.*)\"$")
 	public void addPet(String endPoint) {
-		RestAssured.baseURI = "https://petstore.swagger.io/v2/" + endPoint + "/";
+		RestAssured.baseURI = Constants.BASEURL + endPoint + "/";
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json").accept(ContentType.JSON);
 		response = request.body(PayLoadBuilder.getAddPetPayload()).post();
@@ -26,7 +28,7 @@ public class StepDef {
 
 	@When("^I add a new pet to the store with the \"(.*)\" with invalid id$")
 	public void addPetInvalid(String endPoint) {
-		RestAssured.baseURI = "https://petstore.swagger.io/v2/" + endPoint + "/";
+		RestAssured.baseURI = Constants.BASEURL + endPoint + "/";
 		RequestSpecification request = RestAssured.given();
 		request.header("Content-Type", "application/json").accept(ContentType.JSON);
 		response = request.body(PayLoadBuilder.getInvalidAddPetPayload()).post();
@@ -41,7 +43,7 @@ public class StepDef {
 
 	@When("^I get the details of the pet (.*) , \"(.*)\"$")
 	public void getPetDetails(int petId,String endPoint) {
-		RestAssured.baseURI = "http://petstore.swagger.io/v2/" + endPoint + "/" + petId;
+		RestAssured.baseURI = Constants.BASEURL + endPoint + "/" + petId;
 		RequestSpecification request = RestAssured.given();
 		response = request.get();		
 	}

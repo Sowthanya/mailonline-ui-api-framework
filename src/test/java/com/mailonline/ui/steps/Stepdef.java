@@ -10,6 +10,7 @@ import org.testng.Reporter;
 import com.mailonline.pages.HomePage;
 import com.mailonline.pages.SportPage;
 import com.mailonline.utils.Action;
+import com.mailonline.utils.Constants;
 import com.mailonline.utils.DriverManager;
 import com.mailonline.utils.GenericUtils;
 import com.mailonline.utils.ReportUtil;
@@ -35,7 +36,7 @@ public class Stepdef{
 	@Given("I launch the application")
 	public void launchApplication()	{
 		    			
-		homePage.launchAppURL("https://www.dailymail.co.uk/home/index.html");
+		homePage.launchAppURL(Constants.APPURL);
 		Reporter.log("Application Launched");
 	}	
 	
