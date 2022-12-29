@@ -21,3 +21,12 @@ Please follow the below instructions to clone and execute the scripts from this 
 8. To execute API scenarios , run the file testng-api.xml
 
 ![Capture](https://user-images.githubusercontent.com/71185743/209989318-de5b5d3a-168f-4008-a566-a8b1dc6326e8.PNG)
+
+
+https://user-images.githubusercontent.com/71185743/209992334-a05611ce-5d15-420d-b04f-809b3fa169a4.mp4
+
+
+
+
+https://user-images.githubusercontent.com/71185743/209992833-30cd2d2e-7d6c-4d39-8626-0b0692b2c749.mp4
+
