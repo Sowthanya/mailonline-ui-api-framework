@@ -1,12 +1,19 @@
 package com.mailonline.ui.steps;
 
+import java.time.Duration;
 import java.util.Calendar;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.Reporter;
+
 import com.mailonline.pages.HomePage;
 import com.mailonline.pages.SportPage;
+import com.mailonline.utils.Action;
 import com.mailonline.utils.DriverManager;
 import com.mailonline.utils.GenericUtils;
+import com.mailonline.utils.ReportUtil;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -35,7 +42,7 @@ public class Stepdef{
 	public void verifyHomePage()
 	{
 		String homePageName = homePage.getHomePageName();
-		Assert.assertEquals(homePageName, "Home", "Home Page name : " + homePageName);
+		Assert.assertEquals(homePageName, "Home", "Home Page name : " + homePageName);	
 	}
 	
 	@Then("I should see the current date and Time in the home page")
@@ -45,6 +52,9 @@ public class Stepdef{
 		String dateInHomePage = homePage.getDateTimeFromHomePage();
 		String currentDate = GenericUtils.getDateInRequiredFormat(cal);
 		Assert.assertEquals(dateInHomePage,currentDate);
+		Reporter.log("Current Date and Time in the Home page is verified successfully");
+		Reporter.log("Expected : " + currentDate);
+		Reporter.log("Actual : " + dateInHomePage);
 	}
 
 	@And("^I navigate to \"(.*)\" from \"(.*)\" menu$")
@@ -66,6 +76,7 @@ public class Stepdef{
 		String primaryNavColour = homePage.getPrimaryNavBackgroundColour();
 		String secondaryNavColour = homePage.getSecondaryNavBackgroundColour();
 		Assert.assertEquals(primaryNavColour, secondaryNavColour);
+		Reporter.log("Primary and Secondary navigation menu item colurs are same");
 	}
 	
 	@When("I open the first article")
@@ -96,6 +107,7 @@ public class Stepdef{
     	Assert.assertEquals(sportPage.getImageNumber(), 2);
     	sportPage.getGalleryPrevButton().click();
     	Assert.assertEquals(sportPage.getImageNumber(), 1);
+    	Reporter.log("Image gallery navigations are verified successfully");
     }
     
     @When("^I click on the facebook icon in the image gallery$")
@@ -104,12 +116,18 @@ public class Stepdef{
         sportPage.openSocialMedia();
     }
     
-    @Then("I verify the \"(.*)\" modal dialog is opened$")
+    @Then("^I verify the \"(.*)\" modal dialog is opened$")
     public void verifyFacebookModal(String handleName)
+    {      
+    	String windowTitle = sportPage.verifyFacebookDialog(handleName);   	
+    	Assert.assertEquals(windowTitle.contains("Facebook"),true);
+    	Reporter.log("Facebook Login page opened successfully");
+    }
+    @Then("^I display the details of the \"(.*)\" team from premier league table$")
+    public void premierLeagueTableDetails(String teamName)
     {
-    	String windowTitle = sportPage.verifyFacebookDialog(handleName);
-    	Assert.assertEquals(sportPage.getFacebookUserNameInput().isDisplayed(),true);
-    	System.out.println(windowTitle);
+    	sportPage.displayPremierLeagueDetails(teamName);
+    	Reporter.log(ReportUtil.generateHTMLTable(teamName, sportPage.getTeamPosition(teamName).getText(), sportPage.getTeamPoints(teamName).getText()));
     }
     
 }

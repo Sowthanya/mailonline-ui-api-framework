@@ -3,7 +3,6 @@ package com.mailonline.pages;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mailonline.utils.Action;
+import com.mailonline.utils.GenericUtils;
+import com.mailonline.utils.ReportUtil;
 
 public class SportPage {
 
@@ -43,16 +44,31 @@ public class SportPage {
 	WebElement facebookLoginButton;
 	
 	@FindBy(xpath="//div[@id='email_container']")
-	WebElement facebookUserNameInput;
+	WebElement facebookUserNameInput;	
+	
+	@FindBy(xpath="//div[contains(@class,'competitionTable')]")
+	WebElement premierLeagueTable;
+	
 	
 	public WebElement getFacebookUserNameInput() {
 		return facebookUserNameInput;
 	}
-	
+	//dynamic xpath to get the team's position from the premier league table
+	public WebElement getTeamPosition(String teamName)
+	{		
+		return driver.findElement(By.xpath("//div[contains(@class,'competitionTable')]//tbody/tr[td[contains(@class,'team-short') and text()='" + teamName + "']]/td[contains(@class,'pos')]"));
+	}
+	//dynamic xpath to get the team's position from the premier league table
+	public WebElement getTeamPoints(String teamName)
+	{
+		return driver.findElement(By.xpath("//div[contains(@class,'competitionTable')]//tbody/tr[td[contains(@class,'team-short') and text()='" + teamName + "']]/td[contains(@class,'score-pts')]"));
+	}
 	//dynamic xpath
 	public WebElement getSocialMediaLink(String handleName) {
 		return driver.findElement(By.xpath("(//ul[contains(@class,'linksHolder')])[1]/li[@data-social-scope='" + handleName + "']"));
 	}
+	
+
 	
 	public WebElement getGalleryPrevButton() {
 		return galleryPrevButton;
@@ -93,36 +109,36 @@ public class SportPage {
 		new Actions(driver)
 		.moveToElement(FirstGalleryButton)
 		.build()
-		.perform();			
+		.perform();		
+		
 		
 	}	
 	
 	public String verifyFacebookDialog(String handleName)
 	{		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		
-		String mainWindow = driver.getWindowHandle();		
-		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));		
+		String mainWindow = driver.getWindowHandle();				
 		getSocialMediaLink(handleName).click();		
-		
+		Action.waitForNewWindow(driver,10);
 		Set<String> windows = driver.getWindowHandles();
 	    Iterator<String> iterator = windows.iterator();	
 	    String windowTitle=null;
 	    
-	    while (iterator.hasNext()) {
-	    	
-	          String childWindow = iterator.next();
-	          
+	    while (iterator.hasNext()) {	    	
+	          String childWindow = iterator.next();	          
 	          if (!mainWindow.equalsIgnoreCase(childWindow)) {
 	              driver.switchTo().window(childWindow);   
-	              wait.until(ExpectedConditions.elementToBeClickable(facebookLoginButton));
+	              wait.until(ExpectedConditions.titleContains("Facebook"));
 	              windowTitle = driver.getTitle();
-//	              facebookLoginButton.click();	    
-//	              wait.until(ExpectedConditions.visibilityOf(facebookUserNameInput));
 	              System.out.println(windowTitle);
 	           }
 	       }
 	    return windowTitle;
+	}
+	
+	public void displayPremierLeagueDetails(String teamName)
+	{
+		Action.scrollInToView(driver, getTeamPosition(teamName));	
 	}
 	
 }

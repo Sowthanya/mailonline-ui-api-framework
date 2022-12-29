@@ -39,6 +39,7 @@ public class StepDef {
 		System.out.println(response.getBody().asString());
 		System.out.println(response.statusCode());
 		Assert.assertEquals(response.statusCode(), statusCode);
+		Reporter.log(null);
 	}
 
 	@When("^I get the details of the pet (.*) , \"(.*)\"$")
