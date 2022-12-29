@@ -49,7 +49,7 @@ public class HomePage
 		try
 		{
 		/*Automated the whole scenarios using the below proxy website as mailonline is not accessible in India
-		 * if there are any issues in execution directly , please enable lines 55 to 58 and disable 60 and 61
+		 * if there are any issues in execution directly , please enable lines 54 to 57 and disable 59 and 60
 		 * */			
 //		driver.get("https://www.hidemyass-freeproxy.com/");
 //		driver.manage().window().maximize();
