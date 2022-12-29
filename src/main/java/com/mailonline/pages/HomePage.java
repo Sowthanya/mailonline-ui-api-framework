@@ -48,11 +48,19 @@ public class HomePage
 	{
 		try
 		{
-		driver.get("https://www.hidemyass-freeproxy.com/");
+		/*Automated the whole scenarios using the below proxy website as mailonline is not accessible in India
+		 * if there are any issues in execution directly , please enable lines 55 to 58 and disable 60 and 61
+		 * */			
+//		driver.get("https://www.hidemyass-freeproxy.com/");
+//		driver.manage().window().maximize();
+//		driver.findElement(By.id("form_url_fake")).sendKeys(url);
+//		driver.findElement(By.xpath("//*[@class='button primary']")).click();
+			
+		driver.get(url);
 		driver.manage().window().maximize();
-		driver.findElement(By.id("form_url_fake")).sendKeys(url);
-		driver.findElement(By.xpath("//*[@class='button primary']")).click();
+		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		}catch(Exception e)
 		{
 			e.printStackTrace();			

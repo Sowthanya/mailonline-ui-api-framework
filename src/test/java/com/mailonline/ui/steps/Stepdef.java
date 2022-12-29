@@ -133,7 +133,7 @@ public class Stepdef{
     public void verifyFacebookModal(String handleName)
     {      
     	String windowTitle = sportPage.verifyFacebookDialog(handleName);   	
-    	 Reporter.log("Facebook icon is clicked");
+    	Reporter.log("Facebook icon is clicked");
     	Assert.assertEquals(windowTitle.contains("Facebook"),true);
     	Reporter.log("Facebook Login page opened successfully");
     }
@@ -141,6 +141,7 @@ public class Stepdef{
     public void premierLeagueTableDetails(String teamName)
     {
     	sportPage.displayPremierLeagueDetails(teamName);
+    	Reporter.log("Premier League details of the team: " + teamName);
     	Reporter.log(ReportUtil.generateHTMLTable(teamName, sportPage.getTeamPosition(teamName).getText(), sportPage.getTeamPoints(teamName).getText()));
     }
     
