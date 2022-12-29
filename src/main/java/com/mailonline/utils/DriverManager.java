@@ -26,6 +26,7 @@ public class DriverManager {
 
 	@After
 	public void closeDriver() {
+		if(driver!=null)
 		driver.quit();
 	}
 	

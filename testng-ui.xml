@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Mail Online Regression Suite" verbose="1" parallel="tests"
 	thread-count="1" configfailurepolicy="continue">
-	<test name="Verify home page elements" annotations="JDK"
+	<test name="Verify MailOnline Regression Scenarios" annotations="JDK"
 		preserve-order="true">
 		<classes>
-			<class name="com.mailonline.ui.runner.TestRunner"/>
+			<class name="com.mailonline.runners.TestRunnerUI"/>
 		</classes>
 	</test>
 </suite>

@@ -1,4 +1,4 @@
-package com.mailonline.ui.runner;
+package com.mailonline.runners;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -8,5 +8,5 @@ import io.cucumber.testng.CucumberOptions;
 		glue = {"com.mailonline.ui.steps","com.mailonline.utils"}
 		)
 
-public class TestRunner extends AbstractTestNGCucumberTests {	
+public class TestRunnerUI extends AbstractTestNGCucumberTests {	
 }
