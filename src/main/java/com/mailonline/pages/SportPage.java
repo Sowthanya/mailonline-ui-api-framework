@@ -67,9 +67,7 @@ public class SportPage {
 	public WebElement getSocialMediaLink(String handleName) {
 		return driver.findElement(By.xpath("(//ul[contains(@class,'linksHolder')])[1]/li[@data-social-scope='" + handleName + "']"));
 	}
-	
-
-	
+		
 	public WebElement getGalleryPrevButton() {
 		return galleryPrevButton;
 	}
@@ -109,9 +107,7 @@ public class SportPage {
 		new Actions(driver)
 		.moveToElement(FirstGalleryButton)
 		.build()
-		.perform();		
-		
-		
+		.perform();
 	}	
 	
 	public String verifyFacebookDialog(String handleName)
@@ -130,7 +126,6 @@ public class SportPage {
 	              driver.switchTo().window(childWindow);   
 	              wait.until(ExpectedConditions.titleContains("Facebook"));
 	              windowTitle = driver.getTitle();
-	              System.out.println(windowTitle);
 	           }
 	       }
 	    return windowTitle;

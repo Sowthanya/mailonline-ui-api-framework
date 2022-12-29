@@ -34,12 +34,9 @@ public class StepDef {
 	}
 	@Then("^I verify the response code as (.*)$")
 	public void verifyAddPetStatus(int statusCode) {
-		Reporter.log(response.getBody().asString());		
-		Reporter.log(String.valueOf(response.statusCode()));
-		System.out.println(response.getBody().asString());
-		System.out.println(response.statusCode());
 		Assert.assertEquals(response.statusCode(), statusCode);
-		Reporter.log(null);
+		Reporter.log("Status Code :" + response.statusCode());
+		Reporter.log("Response : " + response.getBody().asString());
 	}
 
 	@When("^I get the details of the pet (.*) , \"(.*)\"$")
@@ -49,14 +46,15 @@ public class StepDef {
 		response = request.get();		
 	}
 	
-	@When("^I verify the response message as \"(.*)\"$")
+	@Then("^I verify the response message as \"(.*)\"$")
 	public void verifyInvalidPetMessage(String errorMesg)
 	{
 		JsonPath jPath = response.jsonPath();
 		String message = jPath.getString("message");
-		System.out.println(message);
-		Reporter.log("ErrorMessage : " + message);			
+		System.out.println(message);			
 		Assert.assertEquals(message, errorMesg);
+		Reporter.log("Error message received as expected");	
+		Reporter.log("ErrorMessage: " + message);	
 	}
 	
 }

@@ -36,6 +36,7 @@ public class Stepdef{
 	public void launchApplication()	{
 		    			
 		homePage.launchAppURL("https://www.dailymail.co.uk/home/index.html");
+		Reporter.log("Application Launched");
 	}	
 	
 	@When("I am on the home page")
@@ -43,6 +44,7 @@ public class Stepdef{
 	{
 		String homePageName = homePage.getHomePageName();
 		Assert.assertEquals(homePageName, "Home", "Home Page name : " + homePageName);	
+		Reporter.log("Home page is displayed successfully");
 	}
 	
 	@Then("I should see the current date and Time in the home page")
@@ -51,23 +53,27 @@ public class Stepdef{
 		Calendar cal = Calendar.getInstance();
 		String dateInHomePage = homePage.getDateTimeFromHomePage();
 		String currentDate = GenericUtils.getDateInRequiredFormat(cal);
+		Reporter.log("Expected Date and Time: " + currentDate);
+		Reporter.log("Actual Date and Time: " + dateInHomePage);
 		Assert.assertEquals(dateInHomePage,currentDate);
 		Reporter.log("Current Date and Time in the Home page is verified successfully");
-		Reporter.log("Expected : " + currentDate);
-		Reporter.log("Actual : " + dateInHomePage);
+		
 	}
 
 	@And("^I navigate to \"(.*)\" from \"(.*)\" menu$")
 	public void navigateToSecondaryMenu(String secondary, String primary)
 	{
 		homePage.getPrimaryNavMenuItem(primary).click();
+		Reporter.log("Clicked on the " + primary + "page");		
 		homePage.getSecondaryNavMenuItem(secondary).click();
+		Reporter.log("Navigated to the " + secondary + "page");		
 	}
 	
 	@When("^I click on the \"(.*)\" primary navigation$")
 	public void primaryNavigation(String menuPrimary)
 	{
 		homePage.getPrimaryNavMenuItem(menuPrimary).click();
+		Reporter.log("Clicked on the " + menuPrimary + "page");	
 	}
 	
 	@Then("I should see both primary and secondary navigations are same in colour")
@@ -83,12 +89,14 @@ public class Stepdef{
 	public void openArticle()
 	{
 		sportPage.openFirstSportsArticle();
+		Reporter.log("First Article in the sports section is opened");
 	}
 	
 	@And("^I Open the image gallery on full screen$")
 	public void openImageGallery()
 	{
 		sportPage.openImageGallery();
+		Reporter.log("Image gallery on the First sports article is opened");
 	}
 	
     @Then("I verify the arrow icons are working as expected")
@@ -100,26 +108,32 @@ public class Stepdef{
     public void verifyImageGalleryNavigations()
     {
     	Assert.assertTrue(sportPage.getGalleryPrevButton().isDisplayed());
+    	Reporter.log("Previous Button is displyed in Gallery full view");
     	Assert.assertTrue(sportPage.getGalleryNextButton().isDisplayed());
+    	Reporter.log("Next Button is displyed in Gallery full view");
     	Assert.assertEquals(!sportPage.getGalleryPrevButton().isEnabled(), true);
+    	Reporter.log("Previous Button is disbled by default in Gallery full view on the first image");
     	Assert.assertEquals(sportPage.getImageNumber(), 1);
+     	Reporter.log("Image counter is displayed correctly on the first image");
     	sportPage.getGalleryNextButton().click();  
     	Assert.assertEquals(sportPage.getImageNumber(), 2);
+    	Reporter.log("Image counter is incremented correctly on clicking next button");
     	sportPage.getGalleryPrevButton().click();
     	Assert.assertEquals(sportPage.getImageNumber(), 1);
-    	Reporter.log("Image gallery navigations are verified successfully");
-    }
+    	Reporter.log("Image counter is decremented correctly when clicked on previous button");
+    	}
     
     @When("^I click on the facebook icon in the image gallery$")
     public void openGalleryNavigation()
     {	
         sportPage.openSocialMedia();
-    }
-    
+        Reporter.log("Social media container is displayed correctly ");
+    }    
     @Then("^I verify the \"(.*)\" modal dialog is opened$")
     public void verifyFacebookModal(String handleName)
     {      
     	String windowTitle = sportPage.verifyFacebookDialog(handleName);   	
+    	 Reporter.log("Facebook icon is clicked");
     	Assert.assertEquals(windowTitle.contains("Facebook"),true);
     	Reporter.log("Facebook Login page opened successfully");
     }

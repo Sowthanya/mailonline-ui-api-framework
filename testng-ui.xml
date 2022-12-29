@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Mail Online Regression Suite" verbose="1" parallel="tests"
-	thread-count="1" configfailurepolicy="continue">
-	<test name="Verify MailOnline Regression Scenarios" annotations="JDK"
-		preserve-order="true">
+<suite name="Mail Online Regression Suite" verbose="1">
+	<test name="Verify MailOnline Regression Scenarios">
 		<classes>
 			<class name="com.mailonline.runners.TestRunnerUI"/>
 		</classes>

@@ -13,7 +13,7 @@ public class PayLoadBuilder {
 	public static Pet getAddPetPayload()
 	{
 		Category categoryObj = new Category();
-		categoryObj.setId(59);
+		categoryObj.setId(59); // for now hard coded the values, we can random generate the in
 		categoryObj.setName("Teenu");
 		
 		Tag tagObj = new Tag();
@@ -52,7 +52,7 @@ public class PayLoadBuilder {
 		photoUrlList.add("url");
 		
 		InvalidPet petObject = new InvalidPet();
-		petObject.setId("Id101");
+		petObject.setId("Id101");//Invalid id
 		petObject.setName("Teenu");
 		petObject.setStatus(Status.available);
 		petObject.setCategory(categoryObj);
